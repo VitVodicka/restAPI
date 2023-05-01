@@ -1,9 +1,9 @@
-import aiomysql
-
+from aiomysql import connect
 
 async def connectToDatabase():
+
     try:
-        conn = await aiomysql.connect(
+        conn = await connect(
             host='eu-cdbr-west-03.cleardb.net',
             port=3306,
             user='b851f9ca828e56',
