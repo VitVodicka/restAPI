@@ -9,22 +9,22 @@ app = FastAPI()
 async def connect():
     return await sqlconnection.connectToDatabase()
 @app.post("/v1/users/user/create")
-async def connect():
+async def createUser():
     return await sqlconnection.connectToDatabase()
 @app.get("/v1/users/user/getUser/")#missing the numbers after getUSer
-async def connect():
+async def getUser():
     return await sqlconnection.connectToDatabase()
 @app.get("/v1/users/user/getUserParametr/")#missing the numbers after getUserParametr and missing parametr
-async def connect():
+async def getUserParametr():
     return await sqlconnection.connectToDatabase()
 @app.get("/v1/users/user/getMessages/")#missing parametr
-async def connect():
+async def getMessages():
     return await sqlconnection.connectToDatabase()
 @app.post("/v1/users/user/sendMessage/")#missing send message parametr
-async def connect():
+async def sendMessage():
     return await sqlconnection.connectToDatabase()
 @app.get(" /v1/users/getAllUsers/")#missing parametr
-async def connect():
+async def getAllUsers():
     return await sqlconnection.connectToDatabase()
 
 
