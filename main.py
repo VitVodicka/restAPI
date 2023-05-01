@@ -1,33 +1,34 @@
 # main.py
 import asyncio
 
-import aiomysql as aiomysql
+from MySqlConnection import sqlconnection;
 import uvicorn
 from fastapi import FastAPI
-
 app = FastAPI()
-
-
-async def connectToDatabase():
-    try:
-        conn = await aiomysql.connect(
-            host='eu-cdbr-west-03.cleardb.net',
-            port=3306,
-            user='b851f9ca828e56',
-            password='ee570b81',
-            db='heroku_1cba10abdc691b6'
-        )
-        return await conn
-    except Exception as e:
-        print(e)
-
-
-
 @app.get("/")
 async def connect():
-    return await connectToDatabase()
+    return await sqlconnection.connectToDatabase()
+@app.post("/v1/users/user/create")
+async def connect():
+    return await sqlconnection.connectToDatabase()
+@app.get("/v1/users/user/getUser/")#missing the numbers after getUSer
+async def connect():
+    return await sqlconnection.connectToDatabase()
+@app.get("/v1/users/user/getUserParametr/")#missing the numbers after getUserParametr and missing parametr
+async def connect():
+    return await sqlconnection.connectToDatabase()
+@app.get("/v1/users/user/getMessages/")#missing parametr
+async def connect():
+    return await sqlconnection.connectToDatabase()
+@app.post("/v1/users/user/sendMessage/")#missing send message parametr
+async def connect():
+    return await sqlconnection.connectToDatabase()
+@app.get(" /v1/users/getAllUsers/")#missing parametr
+async def connect():
+    return await sqlconnection.connectToDatabase()
+
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(connectToDatabase())
+    #loop = asyncio.get_event_loop()
+    #loop.run_until_complete(connectToDatabase())
     uvicorn.run(app, host="0.0.0.0", port=8000)
