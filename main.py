@@ -21,11 +21,14 @@ async def getUser(id:int):
     user = UserParametrs.UserParametrs()
     return await user.getUser(id)
 
-    """
+
     
-/*@app.get("/v1/users/user/getUserParametr/")#missing the numbers after getUserParametr and missing parametr
-async def getUserParametr():
-    return await UserParametrs.UserParametrs.getUse(id,parametr)
+@app.get("/v1/users/user/getUserParametr/{id}/{parameter_value}")#missing the numbers after getUserParametr and missing parametr
+async def getUserParametr(id:int,parameter_value:str):
+    user_parametr = UserParametrs.UserParametrs()
+
+    return await user_parametr.getUserParametrs(id,parameter_value)
+"""
 @app.get("/v1/users/user/getMessages/")#missing parametr
 async def getMessages():
     return await Messages.Message.getMessage(idSender)
