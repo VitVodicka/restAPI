@@ -1,8 +1,13 @@
 from MySqlConnection import sqlconnection
 class UsersFunctions:
-    def __init__(self):
-        self.conn = sqlconnection.connectToDatabase()
+    async def getAllUsers(self):
 
+        try:
+            sqlreturn = await sqlconnection.sqlselectcommand(f"SELECT * FROM heroku_1cba10abdc691b6.users")
+            return {"Id": sqlreturn[0], "Name": sqlreturn[1], "Surname": sqlreturn[2]}
+
+        except Exception as e:
+            return {"Error": str(e)}
     async def createUser(self,name, surname):
 
         if (isinstance(name, str) == True and (surname, str) == True):
@@ -15,8 +20,8 @@ class UsersFunctions:
                 return {"Error":str(e)}
         else:
             return {"Error:":"Inputed values should be string"}
-    async def getAllUsers(self):
-        return 0
+
+
 
 
 

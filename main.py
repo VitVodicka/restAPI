@@ -1,6 +1,5 @@
 # main.py
 from asyncio import get_event_loop
-
 from MySqlConnection import sqlconnection;
 import uvicorn
 from Users import UserFunctions
@@ -25,7 +24,7 @@ async def getUser(id:int):
     
 @app.get("/v1/users/user/getUserParametr/{id}/{parameter_value}")#missing the numbers after getUserParametr and missing parametr
 async def getUserParametr(id:int,parameter_value:str):
-    user_parametr = UserParametrs.UserParametrs()
+    user_parametr = UserParametrs()
 
     return await user_parametr.getUserParametrs(id,parameter_value)
 """
@@ -35,12 +34,14 @@ async def getMessages():
 @app.post("/v1/users/user/sendMessage/")#missing send message parametr
 async def sendMessage():
     return await Messages.Message.sendMessage(idSender,idReciver)
-@app.get(" /v1/users/getAllUsers/")#missing parametr
-async def getAllUsers():
-    return await UserFunctions.UsersFunctions.getAllUsers()
-
-
 """
+@app.get("/v1/users/getAllUsers/")
+async def getAllUsers():
+    user = UserFunctions()#cannot fiund UseFunctions
+    return await user.getAllUsers()
+
+
+
 if __name__ == "__main__":
     loop = get_event_loop()
     loop.run_until_complete(connect())

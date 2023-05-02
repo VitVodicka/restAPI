@@ -16,7 +16,7 @@ async def connectToDatabase():
         print(e)
 
 
-async def sqlselectcommand(command:str):
+async def sqlselectcommand(command):
     try:
         conn = await connect(
             host='eu-cdbr-west-03.cleardb.net',
@@ -31,7 +31,7 @@ async def sqlselectcommand(command:str):
         await cursor.execute(command)
         try:
         # fetch all results
-            r = await cursor.fetchone()
+            r = await cursor.fetchone()#finds list of resaults
             if(r is None):
                 return{"Error 404 ":"not found"}
         except Exception as e:
