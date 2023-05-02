@@ -16,7 +16,7 @@ async def connectToDatabase():
         print(e)
 
 
-async def connectToDatabase2():
+async def sqlselectcommand(command:str):
     try:
         conn = await connect(
             host='eu-cdbr-west-03.cleardb.net',
@@ -28,10 +28,14 @@ async def connectToDatabase2():
         cursor = await conn.cursor()
 
         # execute sql query
-        await cursor.execute("SELECT * FROM heroku_1cba10abdc691b6.users WHERE (IdUser=11)")
-
+        await cursor.execute(command)
+        try:
         # fetch all results
-        r = await cursor.fetchone()
+            r = await cursor.fetchone()
+            if(r is None):
+                return{"Error 404 ":"not found"}
+        except Exception as e:
+            return {"Error":str(e)}
         # detach cursor from connection
         await cursor.close()
 
