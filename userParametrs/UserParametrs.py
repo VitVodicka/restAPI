@@ -9,7 +9,7 @@ class UserParametrs:
             return e
 
     async def getUser(self, id: int):
-        parameters =sqlconnection.connectToDatabase2()
+        parameters =await sqlconnection.connectToDatabase2()
         return parameters
 
         """if isinstance(id, int):

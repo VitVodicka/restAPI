@@ -28,7 +28,7 @@ async def connectToDatabase2():
         cursor = await conn.cursor()
 
         # execute sql query
-        await cursor.execute("SELECT * FROM heroku_1cba10abdc691b6.users WHERE (IdUser=0)")
+        await cursor.execute("SELECT * FROM heroku_1cba10abdc691b6.users WHERE (IdUser=11)")
 
         # fetch all results
         r = await cursor.fetchone()
