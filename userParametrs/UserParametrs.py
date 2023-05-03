@@ -7,6 +7,7 @@ class UserParametrs:
                 sqlreturn = await sqlconnection.sqlselectcommand(f"SELECT {parametr} FROM heroku_1cba10abdc691b6.users WHERE (IdUser={id})")
                 return {parametr:sqlreturn[0]}#returns json type of return first will be the prpoerty, the second would be what it found
 
+
             except Exception as e:
                 return {"Error": str(e)}
         else:

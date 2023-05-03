@@ -24,7 +24,7 @@ async def getUser(id:int):
     
 @app.get("/v1/users/user/getUserParametr/{id}/{parameter_value}")#missing the numbers after getUserParametr and missing parametr
 async def getUserParametr(id:int,parameter_value:str):
-    user_parametr = UserParametrs()
+    user_parametr = UserParametrs.UserParametrs()
 
     return await user_parametr.getUserParametrs(id,parameter_value)
 """
@@ -37,10 +37,8 @@ async def sendMessage():
 """
 @app.get("/v1/users/getAllUsers/")
 async def getAllUsers():
-    user = UserFunctions()#cannot fiund UseFunctions
+    user = UserFunctions.UsersFunctions()#cannot fiund UseFunctions
     return await user.getAllUsers()
-
-
 
 if __name__ == "__main__":
     loop = get_event_loop()
