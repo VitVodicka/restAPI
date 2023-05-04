@@ -1,14 +1,17 @@
 from aiomysql import connect
+import json
 
 async def connect_to_database():#does it asynchronously based on the program=can be done during programme
     # Establishes connection to the database
     try:
+        with open('config_database/config.json') as f:
+            connection=json.load(f)
         conn = await connect(
-            host='eu-cdbr-west-03.cleardb.net',
-            port=3306,
-            user='b851f9ca828e56',
-            password='ee570b81',
-            db='heroku_1cba10abdc691b6'
+            host=connection["host"],
+            port=connection["port"],
+            user=connection["user"],
+            password=connection["password"],
+            db=connection["db"]
         )
 
         return await conn
@@ -18,13 +21,16 @@ async def connect_to_database():#does it asynchronously based on the program=can
 
 async def sql_select_command(command):
     try:
+        with open('config_database/config.json') as f:
+            connection = json.load(f)
         conn = await connect(
-            host='eu-cdbr-west-03.cleardb.net',
-            port=3306,
-            user='b851f9ca828e56',
-            password='ee570b81',
-            db='heroku_1cba10abdc691b6'
+            host=connection["host"],
+            port=connection["port"],
+            user=connection["user"],
+            password=connection["password"],
+            db=connection["db"]
         )
+
         cursor = await conn.cursor()
 
         # execute sql query
@@ -48,13 +54,16 @@ async def sql_select_command(command):
 async def sql_select_command_multiple_lines(command):
 
     try:
+        with open('config_database/config.json') as f:
+            connection = json.load(f)
         conn = await connect(
-            host='eu-cdbr-west-03.cleardb.net',
-            port=3306,
-            user='b851f9ca828e56',
-            password='ee570b81',
-            db='heroku_1cba10abdc691b6'
+            host=connection["host"],
+            port=connection["port"],
+            user=connection["user"],
+            password=connection["password"],
+            db=connection["db"]
         )
+
         cursor = await conn.cursor()
 
         # execute sql query
@@ -80,13 +89,16 @@ async def sql_insert(command):
     # Executes a SQL insert command on the database
     try:
 
-        conn = await connect(#host, ports etc. config in file
-            host='eu-cdbr-west-03.cleardb.net',
-            port=3306,
-            user='b851f9ca828e56',
-            password='ee570b81',
-            db='heroku_1cba10abdc691b6'
+        with open('config_database/config.json') as f:
+            connection = json.load(f)
+        conn = await connect(
+            host=connection["host"],
+            port=connection["port"],
+            user=connection["user"],
+            password=connection["password"],
+            db=connection["db"]
         )
+
         cursor = await conn.cursor()
 
         # execute sql query

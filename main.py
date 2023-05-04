@@ -23,8 +23,6 @@ async def createUser(name:str,surname:str):
 #@app.get("/v1/users/{id}")#gets user based on id
 #if more ids then add array viz. fatapi docs
 
-
-#camelcase to snake_case
 async def getUser(id:int):
     user = user_parametrs.UserParametrs()
     return await user.getUser(id)
@@ -54,6 +52,4 @@ async def getAllUsers():
     return await user.get_all_users()
 #look for the endpoints in api
 if __name__ == "__main__":
-    #loop = get_event_loop()#makes sure that database will be still connected
-    #loop.run_until_complete(connect())
     uvicorn.run(app, host="0.0.0.0", port=8000)
