@@ -5,7 +5,7 @@ from mySql_connection import sql_connection;
 import uvicorn
 from users import user_functions
 from user_parametrs import user_parametrs
-import message
+from message import messages_communication
 from fastapi import FastAPI
 app = FastAPI()
 
@@ -33,15 +33,18 @@ async def getUserParametr(id:int,parameter_value:str):
 
     return await user_parametr.getUserParametrs(id,parameter_value)
 
-@app.get("/v1/users/user/getMessages/{id_Sender}")#gets messages based on the id of sender
+@app.get("/v1/users/user/getMessages/{id_sender}")#gets messages based on the id of sender
 async def getMessages(id_sender:int):
-    messages = message.messages_communication.Message()
-    return await messages.getMessage(id_sender)
-@app.post("/v1/users/user/sendMessage/{id_sender}/{id_reciver}/{textMessage}")#posts a new communication
-async def sendMessage(id_sender:int,id_reciver:int,text_message:str):
-    messages = message.messages_communication.Message()#nastavit autoincrement o 1
-    return await messages.send_message(id_sender, id_reciver, text_message)#raise 404 etc. endpoints
-#swagger
+    message = messages_communication.Message()
+    return await message.get_message(id_sender)
+@app.post("/v1/users/user/sendMessage/{id_sender}/{id_receiver}/{text_message}")#posts a new communication
+async def sendMessage(id_sender:int,id_receiver:int,text_message:str):
+    try:
+        message = messages_communication.Message()
+        return await message.send_message(id_sender,id_receiver,text_message)
+    except Exception as e:
+        return {"Error":e}
+
 @app.get("/v1/users/getAllUsers/")#gets all users
 #openanpi document
 #same with users but if there is none value
