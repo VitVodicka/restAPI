@@ -1,6 +1,6 @@
-from aiomysql import connect,cursors
+from aiomysql import connect
 
-async def connectToDatabase():#does it asynchronously based on the program=can be done during programme
+async def connect_to_database():#does it asynchronously based on the program=can be done during programme
     # Establishes connection to the database
     try:
         conn = await connect(
@@ -16,7 +16,7 @@ async def connectToDatabase():#does it asynchronously based on the program=can b
         print(e)
 
 
-async def sqlselectcommand(command):
+async def sql_select_command(command):
     try:
         conn = await connect(
             host='eu-cdbr-west-03.cleardb.net',
@@ -45,7 +45,7 @@ async def sqlselectcommand(command):
     except Exception as e:
         print(e)
 
-async def sqlselectcommandMultipleLines(command):
+async def sql_select_command_multiple_lines(command):
 
     try:
         conn = await connect(
@@ -76,7 +76,7 @@ async def sqlselectcommandMultipleLines(command):
     except Exception as e:
         print(e)
 
-async def sqlinsert(command):
+async def sql_insert(command):
     # Executes a SQL insert command on the database
     try:
 
