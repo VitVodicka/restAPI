@@ -1,5 +1,4 @@
 from mySql_connection import sql_connection
-from fastapi import HTTPException
 class UsersFunctions:
     async def get_all_users(self):
         # select all users from the database
@@ -16,17 +15,12 @@ class UsersFunctions:
             return {"Error": str(e)}
     async def create_user(self, name:str, surname:str):
         # create a new user in the database with the given name and surname
-        try:
+        if (isinstance(name, str) == True and isinstance(surname, str) == True):
             sqlreturn = await sql_connection.sql_insert(f"INSERT INTO heroku_1cba10abdc691b6.users(Name,Surname) VALUES('{name}','{surname}')")
             return sqlreturn
 
-
-        except (TypeError, ValueError) as e:
-            raise HTTPException(status_code=400, detail="TypeError or Value Error:" + e)
-        except (KeyError, IndexError) as k:
-            raise HTTPException(status_code=404, detail="Not Found:" + k)
-        except(IOError) as io:
-            raise HTTPException(status_code=500, detail="Internal Server Error:" + io)
+        else:
+            return {"Error:":"Inputed values should be string"}
 
 
 

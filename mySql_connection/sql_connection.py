@@ -1,5 +1,4 @@
 from aiomysql import connect
-from fastapi import HTTPException
 import json
 
 async def connect_to_database():#does it asynchronously based on the program=can be done during programme
@@ -15,14 +14,9 @@ async def connect_to_database():#does it asynchronously based on the program=can
             db=connection["db"]
         )
 
-        return conn
-    except (KeyError, IndexError) as k:
-        raise HTTPException(status_code=404, detail="Not Found:" + k)
-        return None
-    except(IOError) as io:
-        raise HTTPException(status_code=500, detail="Internal Server Error:" + io)
-        return None
-
+        return await conn
+    except Exception as e:
+        print(e)
 
 
 async def sql_select_command(command):
@@ -41,24 +35,21 @@ async def sql_select_command(command):
 
         # execute sql query
         await cursor.execute(command)
-
+        try:
         # fetch all results
-        r = await cursor.fetchone()#finds resault
-
+            r = await cursor.fetchone()#finds resault
+            if(r is None):
+                return{"Error 404 ":"not found"}
+        except Exception as e:
+            return {"Error":str(e)}
         # detach cursor from connection
         await cursor.close()
-        if(r==None):
-            raise HTTPException(status_code=404, detail="Not Found:")
+
         # close connection
         conn.close()
-        return await r
-
-    except (KeyError, IndexError) as k:
-        raise HTTPException(status_code=404, detail="Not Found:" + k)
-        return None
-    except(IOError) as io:
-        raise HTTPException(status_code=500, detail="Internal Server Error:" + io)
-        return None
+        return r
+    except Exception as e:
+        print(e)
 
 async def sql_select_command_multiple_lines(command):
 
@@ -81,9 +72,8 @@ async def sql_select_command_multiple_lines(command):
         # fetch all results
             r = await cursor.fetchall()#finds list of resaults
             if(r is None):
-                raise HTTPException(status_code=404, detail="Not Found")
-                return None
-            return r
+                return{"Error 404 ":"not found"}
+
         except Exception as e:
             return {"Error":str(e)}#more specific exceptions
         # detach cursor from connection
@@ -92,16 +82,13 @@ async def sql_select_command_multiple_lines(command):
         # close connection
         conn.close()
         return r
-    except (KeyError, IndexError) as k:
-        raise HTTPException(status_code=404, detail="Not Found:" + k)
-        return None
-    except(IOError) as io:
-        raise HTTPException(status_code=500, detail="Internal Server Error:" + io)
-        return None
+    except Exception as e:
+        print(e)
 
 async def sql_insert(command):
     # Executes a SQL insert command on the database
     try:
+
         with open('config_database/config.json') as f:
             connection = json.load(f)
         conn = await connect(
@@ -116,17 +103,15 @@ async def sql_insert(command):
 
         # execute sql query
         await cursor.execute(command)
-
-        await conn.commit()#commit updates value on SQL COMMANDS except SELECT(INSERT,UPDATE...)
+        try:
+            await conn.commit()#commit updates value on SQL COMMANDS except SELECT(INSERT,UPDATE...)
+        except Exception as e:
+            return {"Error":str(e)}
         # detach cursor from connection
         await cursor.close()
 
         # close connection
         conn.close()
-        return {"Success":200}
-    except (KeyError, IndexError) as k:
-        raise HTTPException(status_code=404, detail="Not Found:" + k)
-        return None
-    except(IOError) as io:
-        raise HTTPException(status_code=500, detail="Internal Server Error:" + io)
-        return None
+        return {"Success":202}
+    except Exception as e:
+        return {"Failure":str(e)}

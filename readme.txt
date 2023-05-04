@@ -26,4 +26,4 @@ V aplikaci jsou k dispozici následující koncové body:
 
 /v1/users/getAllUsers/: Tento koncový bod načte seznam všech uživatelů v databázi.
 
-Každý koncový bod je dokumentován pomocí dokumentace Swagger UI a OpenAPI na adrese:http://127.0.0.1:8000/docs#/
+Každý koncový bod je dokumentován více pomocí dokumentace Swagger UI a OpenAPI na adrese: http://127.0.0.1:8000/docs#/

@@ -15,7 +15,7 @@ async def connect():
     Tests SQL connection and return connection status.
 
     Returns:
-        Success: "202" if successful.
+        null if successful
     """
     return await sql_connection.connect_to_database()
 
@@ -28,7 +28,7 @@ async def createUser(name: str, surname: str):
         surname (str): The user's surname.
 
     Returns:
-        json: A json containing the new user's ID and name.
+        success:202: if successful
     """
     user = user_functions.UsersFunctions()
     return await user.create_user(name, surname)
@@ -86,7 +86,7 @@ async def sendMessage(id_sender: int, id_receiver: int, text_message: str):
         text_message (str): The text of the message.
 
     Returns:
-        json: A dictionary containing the new message s id, sender id, receiver id, and message text.
+        success:202: if successful
     """
     try:
         message = messages_communication.Message()
