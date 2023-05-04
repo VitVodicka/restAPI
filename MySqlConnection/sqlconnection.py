@@ -66,7 +66,7 @@ async def sqlselectcommandMultipleLines(command):
                 return{"Error 404 ":"not found"}
 
         except Exception as e:
-            return {"Error":str(e)}
+            return {"Error":str(e)}#more specific exceptions
         # detach cursor from connection
         await cursor.close()
 
@@ -79,7 +79,8 @@ async def sqlselectcommandMultipleLines(command):
 async def sqlinsert(command):
     # Executes a SQL insert command on the database
     try:
-        conn = await connect(
+
+        conn = await connect(#host, ports etc. config in file
             host='eu-cdbr-west-03.cleardb.net',
             port=3306,
             user='b851f9ca828e56',

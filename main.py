@@ -20,11 +20,17 @@ async def createUser(name:str,surname:str):
     return await user.createUser(name,surname)#await=must be used imidietely
 
 @app.get("/v1/users/user/getUser/{id}")#gets user based on id
+#@app.get("/v1/users/{id}")#gets user based on id
+#if more ids then add array viz. fatapi docs
+
+
+#camelcase to snake_case
 async def getUser(id:int):
     user = UserParametrs.UserParametrs()
     return await user.getUser(id)
-    
+
 @app.get("/v1/users/user/getUserParametr/{id}/{parameter_value}")#gets userparametrs based on id and parametr
+#id behind users
 async def getUserParametr(id:int,parameter_value:str):
     user_parametr = UserParametrs.UserParametrs()
 
@@ -36,14 +42,17 @@ async def getMessages(id_Sender:int):
     return await messages.getMessage(id_Sender)
 @app.post("/v1/users/user/sendMessage/{id_sender}/{id_reciver}/{textMessage}")#posts a new communication
 async def sendMessage(id_sender:int,id_reciver:int,textMessage:str):
-    messages = Message.Messages.Message()
-    return await messages.sendMessage(id_sender,id_reciver,textMessage)
-
+    messages = Message.Messages.Message()#nastavit autoincrement o 1
+    return await messages.sendMessage(id_sender,id_reciver,textMessage)#raise 404 etc. endpoints
+#swagger
 @app.get("/v1/users/getAllUsers/")#gets all users
+#openapi document
+#same with users but if there is none value
+#add doccumentation(PDF)
 async def getAllUsers():
     user = UserFunctions.UsersFunctions()
     return await user.getAllUsers()
-
+#look for the endpoints in api
 if __name__ == "__main__":
     loop = get_event_loop()#makes sure that database will be still connected
     loop.run_until_complete(connect())

@@ -21,7 +21,7 @@ class UserParametrs:
                 return {"Id":sqlreturn[0],"Name":sqlreturn[1],"Surname":sqlreturn[2]}
 
             except Exception as e:
-                return {"Error": str(e)}
+                return {"Error": str(e)}#look for possible exceptions
         else:
-            return {"Error": "id is not an integer"}
+            return {"Error": "id is not an integer"}#raise http exception
 
