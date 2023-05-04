@@ -7,7 +7,6 @@ class Message:
         # check if idSender is an integer
         if isinstance(id_sender, int):
             try:
-                #change heroku to property
                 # execute sql command to select user with idSender
                 sql_return = await sql_connection.sql_select_command(
                     f"SELECT * FROM heroku_1cba10abdc691b6.users WHERE (IdUser={id_sender})")#TODO a sql command

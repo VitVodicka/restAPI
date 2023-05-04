@@ -1,7 +1,6 @@
 # main.py
 from asyncio import get_event_loop
 
-
 from mySql_connection import sql_connection;
 import uvicorn
 from users import user_functions
@@ -10,7 +9,7 @@ import message
 from fastapi import FastAPI
 app = FastAPI()
 
-@app.get("/")#end points of get and post
+@app.get("/")
 #testing sql connection
 async def connect():
     return await sql_connection.connect_to_database()
@@ -44,9 +43,9 @@ async def sendMessage(id_sender:int,id_reciver:int,text_message:str):
     return await messages.send_message(id_sender, id_reciver, text_message)#raise 404 etc. endpoints
 #swagger
 @app.get("/v1/users/getAllUsers/")#gets all users
-#openapi document
+#openanpi document
 #same with users but if there is none value
-#add doccumentation(PDF)
+#add doccumetation(PDF)
 async def getAllUsers():
     user = user_functions.UsersFunctions()
     return await user.get_all_users()

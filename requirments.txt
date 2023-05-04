@@ -1,0 +1,8 @@
+uvicorn 0.22.0
+pip install uvicorn
+
+fastapi 0.95.0
+pip install fastapi
+
+aiomysql 0.0.21
+pip install aiomysql
